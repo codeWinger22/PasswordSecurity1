@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Validator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f7f6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 400px;
+    text-align: center;
+}
+
+h1 {
+    color: #4CAF50;
+}
+
+form {
+    margin: 20px 0;
+}
+
+input[type="password"] {
+    padding: 10px;
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    width: 100%;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+.error-messages {
+    background-color: #ffdddd;
+    color: #d8000c;
+    padding: 10px;
+    margin-top: 20px;
+    border-radius: 5px;
+}
+
+.success-message {
+    background-color: #ddffdd;
+    color: #4CAF50;
+    padding: 10px;
+    margin-top: 20px;
+    border-radius: 5px;
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Password Strength Checker</h1>
+        <form method="POST">
+            <input type="password" name="password" placeholder="Enter your password" required>
+            <button type="submit">Check Password</button>
+        </form>
+        
+        {% if errors %}
+            <div class="error-messages">
+                <h3>Password Errors:</h3>
+                <ul>
+                    {% for error in errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            
+            <div class="suggested-password">
+                <h3>Suggested Password:</h3>
+                <p>{{ suggested_password }}</p>
+            </div>
+        {% elif success %}
+            <div class="success-message">
+                <h3>Your password is strong!</h3>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
